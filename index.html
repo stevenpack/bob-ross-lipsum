@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script type='text/javascript'>
+        async function getPhrases() {
+
+            let phrasesDiv = document.getElementById('phrases');
+            try {
+                let phraseCount = parseInt(document.getElementById('phraseCount').value) || 100;
+                let newline = parseInt(document.getElementById('newline').value) || 0;
+                let phrasesResponse = await fetch(`/api?phrases=${phraseCount}&newline=${newline}`);
+                if (phrasesResponse.status === 200) {
+                    let phrasesText = await phrasesResponse.text();
+                    phrasesDiv.innerText = phrasesText;
+                } else {
+                    phrasesDiv.innerText = "Failed to generate Bob Ross Ipsum";
+                }
+            } catch (e) {
+                phrasesDiv.innerText = "Failed to generate Bob Ross Ipsum";
+                console.error(e);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Bob Ross Lorem Ipsum Generator</h1>
+        <div>
+
+        </div>
+        <form>
+            Generate
+            <input id="phraseCount" type="text" value="100">
+            phrases with a newline every
+            <input id="newline" type="text" value="10">
+            phrases
+            <input type='button' value='Go' onclick='getPhrases();'>
+        </form>
+        <hr/>
+        <div id='phrases'>
+
+        </div>
+    </div>
+</body>
+</html>
