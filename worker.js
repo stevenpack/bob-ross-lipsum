@@ -414,7 +414,7 @@ const ui = "<!DOCTYPE html>\n" +
     "            <input type='button' value='Go' onclick='getPhrases();'>\n" +
     "        </form>\n" +
     "        <hr/>\n" +
-    "        <div id='phrases'>\n" +
+    "        <div id='phrases' style='text-align: justify'>\n" +
     "\n" +
     "        </div>\n" +
     "    </div>\n" +
