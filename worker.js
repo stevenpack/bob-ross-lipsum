@@ -372,7 +372,8 @@ const phrases = [
     "You've got to learn to fight the temptation to resist these things. Just let them happen."
 ];
 
-const ui = "<!DOCTYPE html>\n" +
+const ui = "<!-- Embedded as a string in worker.js -->\n" +
+    "<!DOCTYPE html>\n" +
     "<html>\n" +
     "<head>\n" +
     "    <meta charset=\"utf-8\">\n" +
@@ -407,9 +408,9 @@ const ui = "<!DOCTYPE html>\n" +
     "        </div>\n" +
     "        <form>\n" +
     "            Generate\n" +
-    "            <input id=\"phraseCount\" type=\"text\" value=\"100\">\n" +
+    "            <input id='phraseCount' type='number' value=\"100\">\n" +
     "            phrases with a newline every\n" +
-    "            <input id=\"newline\" type=\"text\" value=\"10\">\n" +
+    "            <input id=\"newline\" type='number' value=\"10\">\n" +
     "            phrases\n" +
     "            <input type='button' value='Go' onclick='getPhrases();'>\n" +
     "        </form>\n" +
@@ -432,7 +433,8 @@ addEventListener('fetch', event => {
 async function handleRequest(request) {
 
     let url = new URL(request.url);
-    console.log(url);
+
+    //Serve the UI
     if (url.pathname === "/" ) {
         let init = { "status" : 200 , "headers" : { 'Content-Type': 'text/html' } };
         return new Response(ui, init);
